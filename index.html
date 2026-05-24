@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>👶 아이 성장 다이어리</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Serif+KR:wght@300;400;500;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0D1B3E;
+  --navy2: #1B2D5A;
+  --navy3: #243770;
+  --gold: #C9962F;
+  --gold2: #E8B84B;
+  --gold3: #F5D98A;
+  --cream: #FBF6EC;
+  --cream2: #F5EDD8;
+  --white: #FFFFFF;
+  --text: #1A1A2E;
+  --text2: #4A4A6A;
+  --text3: #8A8AAA;
+  --green: #2E7D32;
+  --orange: #E65100;
+  --red: #B71C1C;
+  --blue: #1565C0;
+  --shadow: 0 8px 40px rgba(13,27,62,0.15);
+  --shadow2: 0 2px 12px rgba(13,27,62,0.08);
+  --radius: 16px;
+  --radius2: 24px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+/* ─── HEADER ─────────────────────────────────── */
+.header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 60%, var(--navy3) 100%);
+  color: white;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 30px rgba(13,27,62,0.4);
+}
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  border-bottom: 1px solid rgba(201,150,47,0.3);
+}
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.header-icon {
+  width: 44px; height: 44px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 4px 16px rgba(201,150,47,0.4);
+}
+.header-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.header-sub {
+  font-size: 11px;
+  color: var(--gold3);
+  letter-spacing: 1px;
+  margin-top: 1px;
+}
+.header-actions {
+  display: flex; gap: 8px;
+}
+.btn-icon {
+  width: 36px; height: 36px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(201,150,47,0.3);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  color: white;
+  transition: all 0.2s;
+}
+.btn-icon:hover { background: rgba(201,150,47,0.3); transform: scale(1.05); }
+/* Age banner */
+.age-banner {
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.age-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.age-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gold2);
+  line-height: 1;
+}
+.age-label {
+  font-size: 10px;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+.age-divider {
+  width: 1px; height: 36px;
+  background: rgba(255,255,255,0.2);
+}
+.age-info {
+  flex: 1;
+  min-width: 160px;
+}
+.age-name {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+.age-date {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 2px;
+}
+.milestone-badge {
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  color: var(--navy);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+/* Progress bar */
+.progress-bar-wrap {
+  padding: 0 24px 14px;
+}
+.progress-track {
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  height: 6px;
+  position: relative;
+  overflow: visible;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--gold2));
+  transition: width 1s ease;
+  position: relative;
+}
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  right: -5px; top: -3px;
+  width: 12px; height: 12px;
+  background: var(--gold2);
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 0 8px rgba(232,184,75,0.6);
+}
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+}
+.progress-label {
+  font-size: 9px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.5px;
+}
+/* ─── NAV TABS ────────────────────────────────── */
+.nav-tabs {
+  background: var(--navy);
+  display: flex;
+  overflow-x: auto;
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  scrollbar-width: none;
+}
+.nav-tabs::-webkit-scrollbar { display: none; }
+.nav-tab {
+  padding: 10px 16px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 500;
+}
+.nav-tab:hover { color: var(--gold3); }
+.nav-tab.active {
+  color: var(--gold2);
+  border-bottom-color: var(--gold2);
+}
+/* ─── MAIN CONTENT ────────────────────────────── */
+.main { padding: 20px 16px 100px; max-width: 900px; margin: 0 auto; }
+/* Section */
+.section { display: none; }
+.section.active { display: block; }
+/* Cards */
+.card {
+  background: white;
+  border-radius: var(--radius2);
+  box-shadow: var(--shadow2);
+  margin-bottom: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(13,27,62,0.06);
+  transition: box-shadow 0.2s;
+}
+.card:hover { box-shadow: var(--shadow); }
+.card-header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  color: white;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-header-gold {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold2) 100%);
+  color: var(--navy);
+}
+.card-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-badge {
+  background: rgba(255,255,255,0.15);
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+}
+.card-body { padding: 0; }
+/* Current milestone highlight */
+.current-card {
+  background: linear-gradient(135deg, var(--navy) 0%, #1a3a6b 100%);
+  border-radius: var(--radius2);
+  padding: 24px;
+  margin-bottom: 20px;
+  color: white;
+  border: 1px solid rgba(201,150,47,0.3);
+  box-shadow: 0 12px 40px rgba(13,27,62,0.25);
+  position: relative;
+  overflow: hidden;
+}
+.current-card::before {
+  content: '';
+  position: absolute;
+  top: -50px; right: -50px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(201,150,47,0.15) 0%, transparent 70%);
+}
+.current-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--gold3);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+.current-month {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--gold2);
+  margin-bottom: 4px;
+}
+.current-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.current-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tag {
+  background: rgba(201,150,47,0.2);
+  border: 1px solid rgba(201,150,47,0.4);
+  color: var(--gold3);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+}
+/* Milestone row */
+.milestone-row {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid rgba(13,27,62,0.06);
+  transition: background 0.15s;
+  position: relative;
+}
+.milestone-row:last-child { border-bottom: none; }
+.milestone-row:hover { background: var(--cream); }
+.milestone-row.current-row { background: rgba(201,150,47,0.05); }
+.milestone-row.past-row { opacity: 0.65; }
+.milestone-left {
+  width: 70px;
+  min-width: 70px;
+  padding: 14px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: rgba(13,27,62,0.03);
+  border-right: 2px solid rgba(13,27,62,0.06);
+}
+.milestone-left.current-row { background: rgba(201,150,47,0.08); border-right-color: var(--gold); }
+.m-dot {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--cream2);
+  border: 2px solid rgba(13,27,62,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.m-dot.done { background: var(--green); border-color: var(--green); }
+.m-dot.current { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 12px rgba(201,150,47,0.4); }
+.m-dot.future { background: var(--cream2); }
+.m-age {
+  font-size: 10px;
+  color: var(--text3);
+  text-align: center;
+  line-height: 1.3;
+  font-weight: 500;
+}
+.m-age.current { color: var(--gold); font-weight: 700; }
+.milestone-body {
+  flex: 1;
+  padding: 14px 16px;
+  min-width: 0;
+}
+.m-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.m-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.m-item {
+  font-size: 11px;
+  color: var(--text2);
+  line-height: 1.5;
+  padding: 6px 8px;
+  background: var(--cream);
+  border-radius: 8px;
+  border-left: 2px solid transparent;
+}
+.m-item.phys { border-left-color: var(--blue); }
+.m-item.cog  { border-left-color: var(--gold); }
+.m-item.lang { border-left-color: var(--green); }
+.m-item.motor{ border-left-color: var(--orange); }
+.m-item-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text3);
+  margin-bottom: 2px;
+  font-weight: 700;
+}
+.m-note-area {
+  display: none;
+  margin-top: 10px;
+}
+.m-note-area.open { display: block; }
+.m-note {
+  font-size: 12px;
+  color: var(--text2);
+  background: rgba(201,150,47,0.07);
+  border: 1px solid rgba(201,150,47,0.2);
+  border-radius: 8px;
+  padding: 8px 10px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  min-height: 20px;
+}
+.m-note:empty::before { content: '메모 없음'; color: var(--text3); }
+.milestone-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 10px;
+  align-items: center;
+}
+.btn-sm {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(13,27,62,0.12);
+  background: white;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  transition: all 0.2s;
+  color: var(--text3);
+}
+.btn-sm:hover { background: var(--navy); color: white; border-color: var(--navy); }
+.btn-sm.active { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+/* Table-style rows */
+.info-table { width: 100%; border-collapse: collapse; }
+.info-table th {
+  background: linear-gradient(135deg, var(--navy), var(--navy2));
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 10px 12px;
+  text-align: left;
+  letter-spacing: 0.5px;
+}
+.info-table td {
+  padding: 10px 12px;
+  font-size: 12px;
+  color: var(--text2);
+  border-bottom: 1px solid rgba(13,27,62,0.06);
+  vertical-align: top;
+  line-height: 1.6;
+}
+.info-table tr:nth-child(even) td { background: rgba(13,27,62,0.02); }
+.info-table tr:hover td { background: var(--cream); }
+.info-table .age-col {
+  font-family: 'Noto Serif KR', serif;
+  font-weight: 700;
+  color: var(--navy);
+  white-space: nowrap;
+  min-width: 70px;
+}
+.info-table .highlight-row td { background: rgba(201,150,47,0.08) !important; }
+.info-table .highlight-row .age-col { color: var(--gold); }
+/* Alert boxes */
+.alert-box {
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin: 12px 16px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.alert-box.warning { background: rgba(183,28,28,0.07); border-left: 3px solid var(--red); }
+.alert-box.info    { background: rgba(21,101,192,0.07); border-left: 3px solid var(--blue); }
+.alert-box.success { background: rgba(46,125,50,0.07);  border-left: 3px solid var(--green); }
+.alert-box.gold    { background: rgba(201,150,47,0.08);  border-left: 3px solid var(--gold); }
+.alert-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.alert-content { flex: 1; }
+.alert-title { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+.alert-body  { font-size: 11px; line-height: 1.6; color: var(--text2); }
+/* Vaccine schedule */
+.vacc-row {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(13,27,62,0.06);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  transition: background 0.15s;
+}
+.vacc-row:hover { background: var(--cream); }
+.vacc-row.done-row { opacity: 0.6; }
+.vacc-check {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  border: 2px solid rgba(13,27,62,0.2);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.vacc-check.done { background: var(--green); border-color: var(--green); color: white; }
+.vacc-info { flex: 1; }
+.vacc-age  { font-size: 10px; color: var(--gold); font-weight: 700; letter-spacing: 0.5px; margin-bottom: 2px; }
+.vacc-name { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+.vacc-desc { font-size: 11px; color: var(--text2); line-height: 1.5; }
+.vacc-date { font-size: 10px; color: var(--text3); margin-top: 4px; }
+/* Sleep chart */
+.sleep-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-bottom: 1px solid rgba(13,27,62,0.05);
+}
+.sleep-age { width: 80px; font-size: 11px; color: var(--text2); font-weight: 600; }
+.sleep-track { flex: 1; background: rgba(13,27,62,0.06); border-radius: 4px; height: 20px; position: relative; overflow: hidden; }
+.sleep-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; }
+.sleep-fill span { font-size: 10px; font-weight: 700; color: white; }
+.sleep-label { width: 60px; font-size: 10px; color: var(--text3); text-align: right; }
+/* Notes section */
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  padding: 16px;
+}
+.note-card {
+  background: white;
+  border: 1px solid rgba(13,27,62,0.08);
+  border-radius: var(--radius);
+  padding: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+.note-card:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+.note-card-age { font-size: 10px; color: var(--gold); font-weight: 700; letter-spacing: 0.5px; margin-bottom: 6px; }
+.note-card-title { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.note-card-body { font-size: 11px; color: var(--text2); line-height: 1.6; }
+.note-card-body:empty::before { content: '+ 메모 추가'; color: var(--gold); font-style: italic; }
+.note-card-edit { position: absolute; top: 10px; right: 10px; font-size: 14px; opacity: 0.4; }
+.note-card:hover .note-card-edit { opacity: 1; }
+/* ─── MODAL ───────────────────────────────────── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(13,27,62,0.7);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+}
+.modal-overlay.open { display: flex; }
+@media(min-width:600px){
+  .modal-overlay { align-items: center; padding: 20px; }
+}
+.modal {
+  background: white;
+  border-radius: 24px 24px 0 0;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease;
+}
+@media(min-width:600px){
+  .modal { border-radius: 24px; animation: fadeScale 0.3s ease; }
+}
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes fadeScale { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+.modal-header {
+  background: linear-gradient(135deg, var(--navy), var(--navy2));
+  color: white;
+  padding: 20px 24px;
+  border-radius: 24px 24px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@media(min-width:600px){ .modal-header { border-radius: 24px 24px 0 0; } }
+.modal-title { font-family: 'Noto Serif KR', serif; font-size: 16px; font-weight: 700; }
+.modal-close { cursor: pointer; font-size: 20px; color: rgba(255,255,255,0.6); transition: color 0.2s; }
+.modal-close:hover { color: white; }
+.modal-body { padding: 20px 24px; }
+.form-group { margin-bottom: 18px; }
+.form-label { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 6px; display: block; letter-spacing: 0.5px; }
+.form-input, .form-textarea, .form-select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid rgba(13,27,62,0.15);
+  border-radius: 10px;
+  font-size: 13px;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: var(--text);
+  transition: border-color 0.2s;
+  background: white;
+}
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201,150,47,0.12);
+}
+.form-textarea { height: 120px; resize: vertical; }
+.btn-primary {
+  background: linear-gradient(135deg, var(--navy), var(--navy2));
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  transition: all 0.2s;
+  width: 100%;
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(13,27,62,0.3); }
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  color: var(--navy);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  transition: all 0.2s;
+}
+.btn-gold:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(201,150,47,0.3); }
+.btn-row { display: flex; gap: 10px; }
+.btn-row .btn-primary { flex: 1; }
+/* Settings modal */
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(13,27,62,0.07);
+}
+.setting-label { font-size: 13px; font-weight: 600; color: var(--text); }
+.setting-desc  { font-size: 11px; color: var(--text3); margin-top: 2px; }
+/* FAB */
+.fab {
+  position: fixed;
+  bottom: 24px; right: 20px;
+  width: 52px; height: 52px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  box-shadow: 0 6px 24px rgba(201,150,47,0.5);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 50;
+  transition: all 0.2s;
+}
+.fab:hover { transform: scale(1.1) rotate(15deg); }
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--text3);
+}
+.empty-icon { font-size: 48px; margin-bottom: 12px; }
+.empty-text { font-size: 14px; }
+/* Responsive */
+@media(max-width:480px){
+  .m-grid { grid-template-columns: 1fr; }
+  .age-banner { padding: 10px 16px; }
+  .age-num { font-size: 22px; }
+}
+/* Tooltip */
+.tooltip { position: relative; }
+.tooltip-text {
+  display: none;
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--navy);
+  color: white;
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  white-space: nowrap;
+  z-index: 200;
+}
+.tooltip:hover .tooltip-text { display: block; }
+/* Scroll to top */
+.scroll-top {
+  position: fixed;
+  bottom: 86px; right: 20px;
+  width: 40px; height: 40px;
+  background: var(--navy);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: var(--shadow2);
+  display: none;
+  align-items: center; justify-content: center;
+  z-index: 49;
+  transition: all 0.2s;
+}
+.scroll-top.show { display: flex; }
+.scroll-top:hover { background: var(--navy2); transform: translateY(-2px); }
+/* Chip group */
+.chip-group { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.chip {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1.5px solid;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.chip.navy { border-color: var(--navy); color: var(--navy); }
+.chip.navy.sel { background: var(--navy); color: white; }
+.chip.gold  { border-color: var(--gold); color: var(--gold); }
+.chip.gold.sel  { background: var(--gold); color: var(--navy); }
+.chip.green { border-color: var(--green); color: var(--green); }
+.chip.green.sel { background: var(--green); color: white; }
+.chip.orange{ border-color: var(--orange); color: var(--orange); }
+.chip.orange.sel{ background: var(--orange); color: white; }
+/* Share info */
+.share-box {
+  background: linear-gradient(135deg, var(--navy), var(--navy2));
+  border-radius: 16px;
+  padding: 20px;
+  color: white;
+  margin: 16px;
+}
+.share-url {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--gold3);
+  word-break: break-all;
+  margin-top: 8px;
+  font-family: monospace;
+}
+.copy-btn {
+  background: var(--gold);
+  color: var(--navy);
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  font-family: 'Noto Sans KR', sans-serif;
+  transition: all 0.15s;
+}
+.copy-btn:hover { background: var(--gold2); }
+/* Loader (for transitions) */
+.page-fade { animation: pageFade 0.3s ease; }
+@keyframes pageFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+<!-- HEADER -->
+<header class="header">
+  <div class="header-top">
+    <div class="header-brand">
+      <div class="header-icon">👶</div>
+      <div>
+        <div class="header-title" id="appTitle">아이 성장 다이어리</div>
+        <div class="header-sub">BABY GROWTH TRACKER</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-icon tooltip" onclick="openShareModal()" title="공유">
+        🔗<span class="tooltip-text">가족 공유</span>
+      </button>
+      <button class="btn-icon tooltip" onclick="openSettingsModal()">
+        ⚙️<span class="tooltip-text">설정</span>
+      </button>
+    </div>
+  </div>
+  <div class="age-banner">
+    <div class="age-info">
+      <div class="age-name" id="babyNameDisplay">아이 이름을 설정하세요</div>
+      <div class="age-date" id="babyBirthDisplay">생년월일을 입력해 주세요</div>
+    </div>
+    <div class="age-divider"></div>
+    <div class="age-stat">
+      <div class="age-num" id="ageDays">0</div>
+      <div class="age-label">일령</div>
+    </div>
+    <div class="age-divider"></div>
+    <div class="age-stat">
+      <div class="age-num" id="ageMonths">0</div>
+      <div class="age-label">개월</div>
+    </div>
+    <div class="milestone-badge" id="currentStageBadge">설정 필요</div>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    </div>
+    <div class="progress-labels">
+      <span class="progress-label">출생</span>
+      <span class="progress-label">6개월</span>
+      <span class="progress-label">12개월</span>
+      <span class="progress-label">18개월</span>
+      <span class="progress-label">24개월</span>
+    </div>
+  </div>
+</header>
+<!-- NAV -->
+<nav class="nav-tabs" id="navTabs">
+  <div class="nav-tab active" data-tab="milestone" onclick="switchTab('milestone',this)">📅 이정표</div>
+  <div class="nav-tab" data-tab="social"    onclick="switchTab('social',this)">😊 사회·인지</div>
+  <div class="nav-tab" data-tab="feeding"   onclick="switchTab('feeding',this)">🍼 수유·이유식</div>
+  <div class="nav-tab" data-tab="language"  onclick="switchTab('language',this)">🗣️ 언어</div>
+  <div class="nav-tab" data-tab="motor"     onclick="switchTab('motor',this)">🏃 운동</div>
+  <div class="nav-tab" data-tab="sleep"     onclick="switchTab('sleep',this)">💤 수면</div>
+  <div class="nav-tab" data-tab="vaccine"   onclick="switchTab('vaccine',this)">💉 예방접종</div>
+  <div class="nav-tab" data-tab="diary"     onclick="switchTab('diary',this)">📔 육아일기</div>
+</nav>
+<!-- MAIN -->
+<main class="main">
+<!-- ─── 이정표 ─── -->
+<section class="section active page-fade" id="sec-milestone">
+  <div class="current-card" id="currentMilestoneCard">
+    <div class="current-label">▸ 현재 발달 단계</div>
+    <div class="current-month" id="curMonth">—</div>
+    <div class="current-desc" id="curDesc">생년월일을 설정하면 현재 발달 단계가 표시됩니다.</div>
+    <div class="current-tags" id="curTags"></div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">📅 월별 발달 이정표 <span style="font-size:11px;opacity:0.7;">(110일~24개월)</span></div>
+      <div class="card-badge" id="milestoneFilter">전체</div>
+    </div>
+    <div class="card-body" id="milestoneList"></div>
+  </div>
+</section>
+<!-- ─── 사회·인지 ─── -->
+<section class="section page-fade" id="sec-social">
+  <div class="alert-box info">
+    <div class="alert-icon">💡</div>
+    <div class="alert-content">
+      <div class="alert-title">얼굴 인식 & 사회 발달</div>
+      <div class="alert-body">아이는 3~4개월부터 부모 얼굴을 인식하기 시작하며, 각 단계별로 사회적 인지 능력이 발달합니다.</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="card-title">👀 얼굴 인식 & 사회 발달 단계</div></div>
+    <div class="card-body">
+      <table class="info-table" id="socialTable"></table>
+    </div>
+  </div>
+  <div class="alert-box warning" style="margin-top:12px;">
+    <div class="alert-icon">🪞</div>
+    <div class="alert-content">
+      <div class="alert-title">거울 보면 우는 이유 (5~8개월 정상)</div>
+      <div class="alert-body">
+        거울 속 이미지를 낯선 아이로 인식하여 낯가림 반응이 나타납니다.
+        엄마와 함께 거울 놀이를 즐기면 서서히 익숙해지며,
+        13~15개월이 되면 거울 속 자신을 인식하기 시작합니다.
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ─── 수유·이유식 ─── -->
+<section class="section page-fade" id="sec-feeding">
+  <div class="alert-box success">
+    <div class="alert-icon">✅</div>
+    <div class="alert-content">
+      <div class="alert-title">이유식 시작 신호 6가지</div>
+      <div class="alert-body">①목 가누기 ②앉히면 버팀 ③음식 보고 침 흘림 ④어른 먹는 것 보고 오물거림 ⑤혀 내밀기 반사 소실 ⑥체중 출생의 2배 이상</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="card-title">🍼 월령별 수유 & 이유식 가이드</div></div>
+    <div class="card-body">
+      <table class="info-table" id="feedingTable"></table>
+    </div>
+  </div>
+</section>
+<!-- ─── 언어 ─── -->
+<section class="section page-fade" id="sec-language">
+  <div class="card">
+    <div class="card-header"><div class="card-title">🗣️ 언어 발달 단계</div></div>
+    <div class="card-body">
+      <table class="info-table" id="languageTable"></table>
+    </div>
+  </div>
+  <div class="alert-box warning" style="margin-top:12px;">
+    <div class="alert-icon">⚠️</div>
+    <div class="alert-content">
+      <div class="alert-title">언어 발달 지연 경고 신호</div>
+      <div class="alert-body">
+        • 12개월: 옹알이 없음 / 몸짓(가리키기·손 흔들기) 없음<br>
+        • 16개월: 단 하나의 단어도 없음<br>
+        • 24개월: 두 단어 조합 없음 / 어휘 50개 미만<br>
+        • 언어 퇴행(이전에 했던 말 잃어버림) → 즉시 소아과 상담
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ─── 운동 ─── -->
+<section class="section page-fade" id="sec-motor">
+  <div class="card">
+    <div class="card-header"><div class="card-title">🏃 운동 발달 이정표</div></div>
+    <div class="card-body">
+      <table class="info-table" id="motorTable"></table>
+    </div>
+  </div>
+</section>
+<!-- ─── 수면 ─── -->
+<section class="section page-fade" id="sec-sleep">
+  <div class="card">
+    <div class="card-header"><div class="card-title">💤 월령별 수면 패턴</div></div>
+    <div class="card-body" id="sleepChart"></div>
+  </div>
+  <div class="card" style="margin-top:12px;">
+    <div class="card-header card-header-gold"><div class="card-title" style="color:var(--navy)">💡 수면 루틴 황금 법칙</div></div>
+    <div class="card-body">
+      <div class="alert-box gold"><div class="alert-icon">🛁</div><div class="alert-content"><div class="alert-title">취침 루틴 (30분)</div><div class="alert-body">목욕 → 마사지 → 수유(모유/분유) → 그림책 → 자장가 → 취침<br>매일 같은 순서로! 아이 뇌에 '잠 시간' 신호를 줍니다.</div></div></div>
+      <div class="alert-box info"><div class="alert-icon">🌙</div><div class="alert-content"><div class="alert-title">최적 취침 시간</div><div class="alert-body">6~12개월: 저녁 6:30~7:30 / 12~24개월: 저녁 7:00~8:00<br>너무 늦으면 과로로 오히려 잠들기 어려워집니다.</div></div></div>
+      <div class="alert-box success"><div class="alert-icon">☀️</div><div class="alert-content"><div class="alert-title">낮잠 전환 시기</div><div class="alert-body">3회→2회: 7~9개월 / 2회→1회: 15~18개월<br>전환기에는 일시적으로 칭얼댐이 심해질 수 있습니다.</div></div></div>
+    </div>
+  </div>
+</section>
+<!-- ─── 예방접종 ─── -->
+<section class="section page-fade" id="sec-vaccine">
+  <div class="alert-box gold">
+    <div class="alert-icon">💉</div>
+    <div class="alert-content">
+      <div class="alert-title">대한소아과학회 국가 필수 예방접종 일정</div>
+      <div class="alert-body">완료한 접종은 체크박스를 눌러 기록하세요. 저장됩니다.</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header"><div class="card-title">💉 예방접종 체크리스트</div></div>
+    <div class="card-body" id="vaccineList"></div>
+  </div>
+</section>
+<!-- ─── 육아일기 ─── -->
+<section class="section page-fade" id="sec-diary">
+  <div class="alert-box gold">
+    <div class="alert-icon">📔</div>
+    <div class="alert-content">
+      <div class="alert-title">소중한 순간을 기록하세요</div>
+      <div class="alert-body">+ 버튼을 눌러 일기를 추가하고, 카드를 눌러 수정할 수 있습니다.</div>
+    </div>
+  </div>
+  <div id="diaryGrid" class="notes-grid"></div>
+  <div id="diaryEmpty" class="empty-state" style="display:none;">
+    <div class="empty-icon">📔</div>
+    <div class="empty-text">아직 기록된 일기가 없습니다<br><small style="color:var(--text3)">+ 버튼을 눌러 첫 일기를 작성해 보세요!</small></div>
+  </div>
+</section>
+</main>
+<!-- FAB -->
+<button class="fab" id="fabBtn" onclick="fabAction()" title="추가">✏️</button>
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<!-- ─── MODALS ─── -->
+<!-- Settings Modal -->
+<div class="modal-overlay" id="settingsModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">⚙️ 설정</div>
+      <div class="modal-close" onclick="closeModal('settingsModal')">✕</div>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">👶 아이 이름</label>
+        <input class="form-input" id="settingName" placeholder="예: 민준이" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">🎂 생년월일</label>
+        <input class="form-input" type="date" id="settingBirth" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">⚧ 성별</label>
+        <div class="chip-group">
+          <div class="chip navy sel" id="chip-boy" onclick="selectGender('boy')">👦 남아</div>
+          <div class="chip navy" id="chip-girl" onclick="selectGender('girl')">👧 여아</div>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="saveSettings()">💾 저장</button>
+    </div>
+  </div>
+</div>
+<!-- Diary Modal -->
+<div class="modal-overlay" id="diaryModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="diaryModalTitle">📔 육아일기 작성</div>
+      <div class="modal-close" onclick="closeModal('diaryModal')">✕</div>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">📅 날짜</label>
+        <input class="form-input" type="date" id="diaryDate" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">📝 제목</label>
+        <input class="form-input" id="diaryTitle" placeholder="오늘의 특별한 순간..." />
+      </div>
+      <div class="form-group">
+        <label class="form-label">✍️ 내용</label>
+        <textarea class="form-textarea" id="diaryContent" placeholder="아이의 하루를 기록해 보세요. 첫 미소, 첫 뒤집기, 특별한 표정..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">🏷️ 카테고리</label>
+        <div class="chip-group" id="diaryCategoryChips">
+          <div class="chip gold sel" onclick="toggleDiaryCategory(this,'일상')">일상</div>
+          <div class="chip gold" onclick="toggleDiaryCategory(this,'성장')">🌱 성장</div>
+          <div class="chip gold" onclick="toggleDiaryCategory(this,'특별')">⭐ 특별</div>
+          <div class="chip gold" onclick="toggleDiaryCategory(this,'건강')">💊 건강</div>
+          <div class="chip gold" onclick="toggleDiaryCategory(this,'가족')">👨‍👩‍👦 가족</div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-primary" onclick="saveDiary()">💾 저장</button>
+        <button class="btn-gold" id="deleteDiaryBtn" style="display:none;" onclick="deleteDiary()">🗑️</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Note/Milestone Edit Modal -->
+<div class="modal-overlay" id="noteModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="noteModalTitle">📝 메모 수정</div>
+      <div class="modal-close" onclick="closeModal('noteModal')">✕</div>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">✍️ 메모</label>
+        <textarea class="form-textarea" id="noteContent" placeholder="이 시기에 대한 메모, 특이사항, 아이의 반응 등을 기록하세요..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">✅ 달성 여부</label>
+        <div class="chip-group">
+          <div class="chip green sel" id="chip-achieved" onclick="setAchieved(true)">✓ 달성</div>
+          <div class="chip navy" id="chip-not-achieved" onclick="setAchieved(false)">○ 미달성</div>
+        </div>
+      </div>
+      <div class="form-group" id="achievedDateGroup">
+        <label class="form-label">📅 달성 날짜</label>
+        <input class="form-input" type="date" id="achievedDate" />
+      </div>
+      <button class="btn-primary" onclick="saveNote()">💾 저장</button>
+    </div>
+  </div>
+</div>
+<!-- Share Modal -->
+<div class="modal-overlay" id="shareModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">🔗 가족 공유</div>
+      <div class="modal-close" onclick="closeModal('shareModal')">✕</div>
+    </div>
+    <div class="modal-body">
+      <div class="share-box">
+        <div style="font-size:13px;font-weight:700;margin-bottom:8px;">🌐 GitHub Pages 배포 링크</div>
+        <div class="share-url" id="shareUrl">https://[username].github.io/baby-diary/</div>
+        <button class="copy-btn" onclick="copyUrl()">📋 링크 복사</button>
+      </div>
+      <div style="margin-top:16px;">
+        <div class="alert-box info">
+          <div class="alert-icon">📋</div>
+          <div class="alert-content">
+            <div class="alert-title">GitHub Pages 배포 방법</div>
+            <div class="alert-body">
+              1. 이 HTML 파일을 index.html로 저장<br>
+              2. GitHub에서 새 저장소 생성 (예: baby-diary)<br>
+              3. index.html 파일 업로드<br>
+              4. Settings → Pages → Branch: main, /root → Save<br>
+              5. 링크 복사 후 가족과 공유!
+            </div>
+          </div>
+        </div>
+        <div class="alert-box success" style="margin-top:8px;">
+          <div class="alert-icon">💡</div>
+          <div class="alert-content">
+            <div class="alert-title">데이터 저장 방식</div>
+            <div class="alert-body">모든 기록(일기, 메모, 접종 기록)은 각 기기의 브라우저에 저장됩니다. 가족 간 데이터 공유는 '내보내기/가져오기' 기능을 이용하세요.</div>
+          </div>
+        </div>
+      </div>
+      <div class="btn-row" style="margin-top:16px;">
+        <button class="btn-primary" onclick="exportData()">📤 데이터 내보내기</button>
+        <button class="btn-gold" onclick="document.getElementById('importFile').click()">📥 가져오기</button>
+      </div>
+      <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(this)">
+    </div>
+  </div>
+</div>
+<script>
+// ─── DATA ───────────────────────────────────────────────────────────
+const MILESTONES = [
+  {
+    id:'m1', age:'3~4개월', days:'90~120일', emoji:'👀',
+    title:'얼굴 인식 & 미소 반응',
+    phys:'체중 6~7kg\n키 60~63cm\n눈 초점 맞춤',
+    cog:'부모 얼굴 인식 시작\n미소로 반응\n소리 나는 곳 고개 돌림',
+    lang:'옹알이 시작(아~우~)\n웃음소리\n소리 모방 시도',
+    motor:'목 가누기 완성\n엎드려 고개 들기\n손·발 빨기',
+    tip:'많이 말 걸어주기 / 배밀이 30분 이상 / 얼굴 표정 다양하게',
+    tags:['목 가누기','첫 미소','옹알이'],
+    minDays:90, maxDays:120
+  },
+  {
+    id:'m2', age:'4~5개월', days:'120~150일', emoji:'👨‍👩‍👦',
+    title:'부모·조부모 구별 시작',
+    phys:'체중 7~8kg\n침 많이 흘림\n이앓이 시작 가능',
+    cog:'엄마·아빠 vs 낯선 사람 구별\n할아버지·할머니 인식 시작\n장난감 쥐고 탐색',
+    lang:'다양한 모음 소리\n부모 말에 반응 뚜렷\n높낮이로 감정 표현',
+    motor:'뒤집기 시작(등→배)\n물건 잡기 시도\n발차기 활발',
+    tip:'조부모와 정기적 만남 / 뒤집기 공간 확보 / 안전한 바닥 환경',
+    tags:['가족 인식','뒤집기 시작'],
+    minDays:120, maxDays:150
+  },
+  {
+    id:'m3', age:'5~6개월', days:'150~180일', emoji:'🪞',
+    title:'낯가림 시작 & 거울 반응',
+    phys:'체중 7.5~8.5kg\n밤 수유 1~2회로 감소',
+    cog:'거울 반응 탐색(이미지 탐색)\n낯가림 본격 시작\n인과관계 인지',
+    lang:'자음+모음 조합\n바바·마마 유사 소리\n감정 소리 다양화',
+    motor:'양방향 뒤집기\n앉기 시도(지지 필요)\n물건 입에',
+    tip:'이유식 준비 단계 / 낯가림 시 안정감 / 거울 놀이 함께하기',
+    tags:['낯가림','거울 탐색','이유식 준비'],
+    minDays:150, maxDays:180
+  },
+  {
+    id:'m4', age:'6개월', days:'180일', emoji:'🍼',
+    title:'이유식 시작 & 부모 완전 인식',
+    phys:'체중 8kg 내외',
+    cog:'부모 얼굴 명확히 인식\n이름 부르면 반응\n감정 이입 시작',
+    lang:'다다·바바 반복\n소리 모방 정확\n음성으로 요구',
+    motor:'혼자 앉기 시도\n배밀이·기기 시작\n집게 잡기',
+    tip:'이유식 1단계 시작 / 알레르기 확인(3일 규칙) / 이름 자주 불러주기',
+    tags:['이유식 시작','혼자 앉기'],
+    minDays:175, maxDays:195
+  },
+  {
+    id:'m5', age:'7~8개월', days:'210~240일', emoji:'🐛',
+    title:'기기 시작 & 낯가림 절정',
+    phys:'유치 나기 시작\n체중 8.5~9kg',
+    cog:'낯가림 절정\n부모 없으면 울음\n까꿍 놀이 좋아함',
+    lang:'다양한 자음\n엄마·아빠 소리 유사\n손짓 의사 표현',
+    motor:'기기 시작(사방)\n붙잡고 일어서기 시도\n집게 잡기 발달',
+    tip:'낙상 방지 / 계단 게이트 / 콘센트 커버 / 이유식 2회',
+    tags:['기기 시작','낯가림 절정','이유식 2회'],
+    minDays:210, maxDays:245
+  },
+  {
+    id:'m6', age:'9~10개월', days:'270~300일', emoji:'🤝',
+    title:'이름 반응 & 까꿍 놀이',
+    phys:'체중 9~10kg\n첫 치아 완성',
+    cog:'이름에 명확히 반응\n\'안 돼\' 이해\n모방 놀이 활발',
+    lang:'\'엄마\'\'아빠\' 의미 있게\n간단한 지시 이해\n박수·손 흔들기',
+    motor:'가구 붙잡고 이동\n혼자 서기 시도\n소근육 발달 가속',
+    tip:'자폐 선별 검사(9개월 검진) / 핑거푸드 도입 / 위험물 제거',
+    tags:['이름 반응','모방 놀이','서기 시도'],
+    minDays:270, maxDays:310
+  },
+  {
+    id:'m7', age:'11~12개월', days:'330~365일', emoji:'🎉',
+    title:'첫 걸음마 & 첫 단어!',
+    phys:'첫 돌: 출생 체중 3배\n키 출생 1.5배\n뇌 발달 급속',
+    cog:'물건 개념 이해\n간단한 지시 수행\n애착 대상 명확',
+    lang:'첫 단어 시작 (1~3개)\n맘마·어부바\n제스처+소리 결합',
+    motor:'혼자 서기 가능\n첫 걸음마!\n계단 오르기 관심',
+    tip:'걸음마 연습 공간 / 미끄럼 방지 신발 / 첫 생일 기념',
+    tags:['첫 걸음마🎉','첫 단어','첫 생일'],
+    minDays:330, maxDays:380
+  },
+  {
+    id:'m8', age:'13~15개월', days:'13~15개월', emoji:'🏆',
+    title:'자아 인식 & 단어 폭발',
+    phys:'체중 10~11kg\n활동량 급증',
+    cog:'거울 속 자신 인식!\n탐색 욕구 강함\n\'내 것\' 개념',
+    lang:'단어 5~10개\n\'아니야\' 이해\n끄덕임 의사 표현',
+    motor:'안정적 걷기\n공 던지기\n블록 3~4개',
+    tip:'어휘 노출 늘리기 / 생우유 도입 가능 / 안전 탐색 허용',
+    tags:['거울 자아 인식','생우유 시작'],
+    minDays:390, maxDays:465
+  },
+  {
+    id:'m9', age:'16~18개월', days:'16~18개월', emoji:'🗣️',
+    title:'두 단어 조합 & 달리기',
+    phys:'대·소근육 협응\n달리기 시작',
+    cog:'소유 개념 생김\n모방 행동 풍부\n분리불안 여전',
+    lang:'단어 10~20개\n두 단어 조합 시작\n그림책 반응',
+    motor:'달리기·계단 오르기\n크레파스 낙서\n블록 4~6개',
+    tip:'분리불안 공감 / 규칙적 생활 / 그림책 함께 읽기',
+    tags:['달리기','두 단어 문장','분리불안'],
+    minDays:480, maxDays:555
+  },
+  {
+    id:'m10', age:'19~21개월', days:'19~21개월', emoji:'💬',
+    title:'감정 표현 & 역할 놀이',
+    phys:'체중 11~12kg\n이갈이 계속',
+    cog:'타인 감정 인식\n역할놀이 시작\n고집·떼쓰기 강화',
+    lang:'단어 20~50개\n두 단어 문장\n\'왜?\' 묻기',
+    motor:'뛰기·점프 시도\n공 차기\n블록 4~6개',
+    tip:'감정 표현 수용 / \'싫어\'도 존중 / 일관된 훈육',
+    tags:['역할 놀이','감정 공감','떼쓰기'],
+    minDays:570, maxDays:645
+  },
+  {
+    id:'m11', age:'22~24개월', days:'22~24개월', emoji:'🎓',
+    title:'자아 강화 & 가족 완전 인식',
+    phys:'만 2세 체중 12~14kg\n키 85~92cm\n뇌 발달 80%',
+    cog:'자아 강화\n또래 관심\n조부모 완전 인식\n규칙 이해',
+    lang:'단어 50개 이상\n2~3단어 문장\n이름·나이 말하기',
+    motor:'뛰기·계단 오르내리기\n세발자전거 관심\n가위질 시도',
+    tip:'또래 놀이 / 조부모 자주 만남 / 취침 전 루틴 확립',
+    tags:['50단어+','또래 놀이','배변 훈련 준비'],
+    minDays:660, maxDays:740
+  },
+];
+const SOCIAL_DATA = [
+  {age:'3~4개월',topic:'얼굴 인식 시작',content:'부모 얼굴 보면 미소 / 30cm 내 초점',point:'눈 맞추면 방긋 웃는가?',role:'얼굴 가까이 대고 미소 / 다양한 표정'},
+  {age:'4~5개월',topic:'부모·조부모 구별',content:'엄마·아빠 목소리에 더 활발히 반응 / 조부모 인식 시작',point:'할아버지 보면 웃는가?',role:'조부모와 정기적 만남 / 안정적 상호작용'},
+  {age:'5~6개월',topic:'거울 반응 탐색',content:'거울 속 이미지에 관심 / 낯선 아이로 인식 / 거울 치기 시도',point:'거울 보면 웃는가?',role:'거울 놀이 함께 / \'저게 누구야~?\' 놀이'},
+  {age:'6~9개월',topic:'낯가림 절정',content:'부모 이외 낯선 어른에게 울음 / 조부모도 낯가림 가능',point:'엄마 없으면 우는가?',role:'강제로 안기게 하지 않기 / 자주 만남'},
+  {age:'9~12개월',topic:'친숙한 어른 완전 인식',content:'부모·조부모 얼굴 완전 인식 / 이름 부르면 반응',point:'할아버지 보면 반갑게 반응?',role:'조부모와 놀이 / 감정 표현 격려'},
+  {age:'13~15개월',topic:'자아 인식 태동',content:'거울 속 자신에게 손 뻗기 / \'내 것\' 개념',point:'사진 속 자신 가리키는가?',role:'사진으로 \'이게 누구야?\' 놀이'},
+  {age:'16~18개월',topic:'타인 감정 인식',content:'엄마가 울면 위로하려 함 / 공감 능력 싹틈',point:'엄마가 슬프면 다가오는가?',role:'감정 언어 표현 / 감정 수용하기'},
+  {age:'19~24개월',topic:'가족 관계 완전 이해',content:'가족 완전 인식 / 사진 보고 이름 말함 / 또래 관심',point:'가족 사진 보고 가리킬 수 있는가?',role:'가족 앨범 함께 / 영상통화'},
+];
+const FEEDING_DATA = [
+  {age:'3~4개월',type:'모유/분유',amount:'180~210ml',freq:'5~6회',stage:'준비 없음',ok:'–',avoid:'꿀·우유·달걀흰자·견과류',note:'이유식 아직 이른 시기'},
+  {age:'6개월',type:'모유+이유식',amount:'200ml + 이유식 50~80g',freq:'모유4 이유식1',stage:'1단계 초기',ok:'쌀미음·단호박·감자·고구마',avoid:'꿀·생선·달걀흰자·가공식',note:'한 가지씩 3일 간격 도입'},
+  {age:'7~8개월',type:'모유+이유식',amount:'180~200ml + 100~120g',freq:'모유3~4 이유식1~2',stage:'1→2단계',ok:'쌀죽·두부·닭고기·당근',avoid:'꿀·조개류·가공육',note:'물성: 으깬 형태 / 1일 2회 시작'},
+  {age:'9~10개월',type:'모유+이유식',amount:'150~180ml + 150~180g',freq:'모유3 이유식2',stage:'2단계 중기',ok:'쌀죽(입자감)·소고기·연두부·계란노른자',avoid:'꿀·생우유·짠 음식',note:'핑거푸드 도입 시작'},
+  {age:'11~12개월',type:'모유+이유식',amount:'100~150ml + 200~220g',freq:'모유2~3 이유식2~3',stage:'3단계 후기',ok:'무른 밥·소고기·닭고기·계란전체',avoid:'꿀·생우유·짠 음식',note:'핑거푸드 적극 / 스스로 먹기 격려'},
+  {age:'13~18개월',type:'유아식 전환',amount:'생우유 200~400ml',freq:'유아식3 간식1~2',stage:'유아식',ok:'다양한 가족 음식(간 약하게)·생우유 가능',avoid:'꿀·견과류(질식)·가공식품',note:'숟가락·포크 스스로 사용'},
+  {age:'19~24개월',type:'완전 유아식',amount:'생우유 400~500ml/일',freq:'유아식3 간식2',stage:'완전 유아식',ok:'가족 식사 함께·균형 식단',avoid:'꿀(여전히)·가공식품 최소화',note:'식사 거부 정상 / 강요 금지'},
+];
+const LANGUAGE_DATA = [
+  {age:'3~4개월',stage:'옹알이 시작',express:'아~, 우~, 에~ 모음 위주',receive:'부모 목소리에 반응',vocab:'–',tip:'많이 말 걸기 / 높낮이 다양하게'},
+  {age:'5~6개월',stage:'자음 시작',express:'바, 마, 다 소리 / 자음+모음',receive:'이름 부르면 반응 시작',vocab:'–',tip:'아이 소리 따라하기 / 그림책'},
+  {age:'7~8개월',stage:'음절 반복',express:'다다다, 바바바 / 반복 옹알이',receive:'간단한 지시 이해 시작',vocab:'–',tip:'반응하며 대화 / \'맞아~\' \'그래~\''},
+  {age:'9~10개월',stage:'의사 표현',express:'손가락 가리키기 / 몸짓+소리',receive:'이름 명확히 반응 / 지시 수행',vocab:'첫 단어 직전',tip:'가리키는 것 이름 말해주기'},
+  {age:'11~12개월',stage:'첫 단어',express:'의미 있는 첫 단어 / 맘마·아빠·까까',receive:'2단계 지시 이해',vocab:'1~3개',tip:'단어 확장하기 / \'맘마~ 맛있는 맘마~\''},
+  {age:'13~15개월',stage:'단어 폭발기',express:'단어 급증 / 새 단어 빠르게',receive:'간단한 질문 이해 / 그림 가리키기',vocab:'5~10개',tip:'그림책 / 사물 이름 반복'},
+  {age:'16~18개월',stage:'두 단어 시작',express:'엄마 까까 / 더 줘 / 두 단어 조합',receive:'신체 부위 5~10개 이해',vocab:'10~20개',tip:'문장으로 확장해 말해주기'},
+  {age:'19~21개월',stage:'문장 발달',express:'두 단어 문장 활발 / \'왜?\' 묻기',receive:'복잡한 지시 이해',vocab:'20~50개',tip:'질문에 답해주기 / 대화 주고받기'},
+  {age:'22~24개월',stage:'문장 완성',express:'2~3단어 문장 / 이름·나이 말하기',receive:'동화책 내용 이해',vocab:'50개 이상',tip:'풍부한 언어 환경 / 스크린 최소화'},
+];
+const MOTOR_DATA = [
+  {age:'3~4개월',milestone:'목 가누기 완성',gross:'엎드려 고개 45~90° / 양손으로 가슴 받치기',fine:'손 쥐고 펴기 / 물건 잡기 시도',walk:'누워서 발차기',safety:'혼자 두지 않기 / 소파 낙상 주의'},
+  {age:'5~6개월',milestone:'뒤집기 시작',gross:'등→배 뒤집기 / 허리 근육 발달',fine:'물건 집어 입에 / 두 손으로 잡기',walk:'발차기·배밀이 준비',safety:'침대 낙상 주의 / 뒤집힌 채 재우지 않기'},
+  {age:'7~8개월',milestone:'기기 시작',gross:'배밀이→무릎 기기 / 사방으로 이동',fine:'집게 잡기 발달 / 손가락 독립 운동',walk:'붙잡고 일어서기 시도',safety:'계단 게이트 / 콘센트 커버 / 작은 물건 치우기'},
+  {age:'9~10개월',milestone:'붙잡고 이동',gross:'가구 붙잡고 이동 / 균형 감각 발달',fine:'집게 잡기 완성 / 손가락 음식 집기',walk:'혼자 서기 시도',safety:'날카로운 모서리 / 계단 게이트 필수'},
+  {age:'11~12개월',milestone:'첫 걸음마!',gross:'혼자 서기 / 첫 발걸음!',fine:'크레파스 잡기 / 두꺼운 책 넘기기',walk:'🎉 첫 걸음마!',safety:'바닥 매트 / 넘어져도 과잉 반응 금지'},
+  {age:'13~15개월',milestone:'혼자 걷기',gross:'안정적 보행 / 계단 관심',fine:'숟가락 시도 / 블록 3~4개',walk:'안정적으로 걷기',safety:'계단 항상 동행 / 주방·욕실 게이트'},
+  {age:'16~18개월',milestone:'달리기 시작',gross:'달리기 시작 / 공 차기',fine:'크레파스 낙서 / 블록 4~6개',walk:'달리기·빠른 걷기',safety:'달리다 낙상 주의 / 교통 안전'},
+  {age:'19~21개월',milestone:'계단 오르내리기',gross:'계단 두 발로 / 점프 시도',fine:'가위 관심 / 블록 6개 이상',walk:'달리기 안정화',safety:'계단 난간 잡기 / 교통 안전 교육'},
+  {age:'22~24개월',milestone:'뛰기·점프',gross:'뛰기 완성 / 두 발 점프',fine:'세밀한 손 조작 / 그림 그리기',walk:'균형 잡기 향상',safety:'세발자전거 헬멧 / 교통 안전'},
+];
+const SLEEP_DATA = [
+  {age:'3~4개월',total:'14~17',nap:'3~4회',napDur:'45~90분',night:'9~11시간',pct:88},
+  {age:'5~6개월',total:'13~15',nap:'3회',napDur:'1~1.5시간',night:'10~11시간',pct:82},
+  {age:'7~8개월',total:'12~15',nap:'2~3회',napDur:'1~2시간',night:'10~12시간',pct:75},
+  {age:'9~12개월',total:'12~15',nap:'2회',napDur:'1~2시간',night:'10~12시간',pct:75},
+  {age:'13~18개월',total:'11~14',nap:'1~2회',napDur:'1~2시간',night:'10~12시간',pct:69},
+  {age:'19~24개월',total:'11~14',nap:'1회',napDur:'1~2시간',night:'10~12시간',pct:69},
+];
+const VACCINES = [
+  {id:'v1',age:'4개월',name:'DTaP 3차 + IPV 3차 + Hib 3차 + PCV 3차',disease:'백일해·디프테리아·파상풍 / 소아마비 / 폐렴구균',note:'2차 접종 후 2개월'},
+  {id:'v2',age:'6개월',name:'HepB 3차 + 인플루엔자 1차',disease:'B형 간염 완성 / 독감 예방',note:'독감은 매년 접종 권장'},
+  {id:'v3',age:'12개월',name:'MMR 1차 + VZV 1차 + HepA 1차 + JEV 1차',disease:'홍역·유행성이하선염·풍진 / 수두 / A형간염 / 일본뇌염',note:'첫 돌 기념 접종 (동시 접종 가능)'},
+  {id:'v4',age:'15~18개월',name:'DTaP 4차 + Hib 4차 + PCV 추가',disease:'백일해·디프테리아·파상풍 (부스터) / 폐렴구균',note:'부스터 접종'},
+  {id:'v5',age:'18개월',name:'HepA 2차',disease:'A형 간염 완성',note:'1차 후 6~18개월'},
+  {id:'v6',age:'24개월',name:'JEV 2차 + 인플루엔자 (매년)',disease:'일본뇌염 / 독감',note:'매년 독감 접종 권장'},
+];
+// ─── STATE ──────────────────────────────────────────────────────────
+let state = {
+  name: '', birth: '', gender: 'boy',
+  vaccDone: {}, milestoneNotes: {}, milestoneAchieved: {}, achievedDates: {},
+  diaries: []
+};
+function loadState() {
+  try {
+    const s = localStorage.getItem('babyDiary');
+    if (s) state = {...state, ...JSON.parse(s)};
+  } catch(e){}
+}
+function saveState() {
+  localStorage.setItem('babyDiary', JSON.stringify(state));
+}
+// ─── AGE CALCULATION ─────────────────────────────────────────────────
+function getDaysOld() {
+  if (!state.birth) return 0;
+  const b = new Date(state.birth);
+  const now = new Date();
+  return Math.floor((now - b) / 86400000);
+}
+function getMonthsOld() {
+  if (!state.birth) return 0;
+  const b = new Date(state.birth);
+  const now = new Date();
+  let m = (now.getFullYear() - b.getFullYear()) * 12 + (now.getMonth() - b.getMonth());
+  if (now.getDate() < b.getDate()) m--;
+  return Math.max(0, m);
+}
+function getCurrentMilestone(days) {
+  if (days < 90) return null;
+  for (let i = MILESTONES.length - 1; i >= 0; i--) {
+    if (days >= MILESTONES[i].minDays) return MILESTONES[i];
+  }
+  return MILESTONES[0];
+}
+// ─── HEADER UPDATE ───────────────────────────────────────────────────
+function updateHeader() {
+  const days = getDaysOld();
+  const months = getMonthsOld();
+  document.getElementById('ageDays').textContent = days;
+  document.getElementById('ageMonths').textContent = months;
+  document.getElementById('babyNameDisplay').textContent = state.name || '아이 이름을 설정하세요';
+  if (state.birth) {
+    const b = new Date(state.birth);
+    document.getElementById('babyBirthDisplay').textContent = `${b.getFullYear()}년 ${b.getMonth()+1}월 ${b.getDate()}일 출생`;
+  }
+  const pct = Math.min(100, (days / 730) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  const cur = getCurrentMilestone(days);
+  if (cur) {
+    document.getElementById('currentStageBadge').textContent = cur.age;
+    document.getElementById('curMonth').textContent = cur.emoji + ' ' + cur.age;
+    document.getElementById('curDesc').textContent = cur.tip;
+    const tagsEl = document.getElementById('curTags');
+    tagsEl.innerHTML = cur.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+  }
+  if (state.name) {
+    document.getElementById('appTitle').textContent = state.name + '의 성장 다이어리';
+    document.title = state.name + '의 성장 다이어리';
+  }
+}
+// ─── RENDER MILESTONE LIST ───────────────────────────────────────────
+function renderMilestones() {
+  const days = getDaysOld();
+  const el = document.getElementById('milestoneList');
+  el.innerHTML = MILESTONES.map(m => {
+    const isCurrent = days >= m.minDays && days < m.maxDays;
+    const isPast = days >= m.maxDays;
+    const note = state.milestoneNotes[m.id] || '';
+    const achieved = state.milestoneAchieved[m.id];
+    const aDate = state.achievedDates[m.id] || '';
+    const dotClass = isPast ? 'done' : isCurrent ? 'current' : 'future';
+    const rowClass = isCurrent ? 'current-row' : isPast ? 'past-row' : '';
+    const ageClass = isCurrent ? 'current' : '';
+    return `
+    <div class="milestone-row ${rowClass}" id="row-${m.id}">
+      <div class="milestone-left ${isCurrent?'current-row':''}">
+        <div class="m-dot ${dotClass}">${isPast ? '✓' : isCurrent ? '●' : '○'}</div>
+        <div class="m-age ${ageClass}">${m.age}</div>
+      </div>
+      <div class="milestone-body">
+        <div class="m-title">${m.emoji} ${m.title}</div>
+        <div class="m-grid">
+          <div class="m-item phys"><div class="m-item-label">신체</div>${m.phys}</div>
+          <div class="m-item cog"><div class="m-item-label">인지·사회</div>${m.cog}</div>
+          <div class="m-item lang"><div class="m-item-label">언어</div>${m.lang}</div>
+          <div class="m-item motor"><div class="m-item-label">운동</div>${m.motor}</div>
+        </div>
+        ${note || achieved ? `
+        <div class="m-note-area open">
+          <div class="m-note">${note ? escHtml(note) : ''}</div>
+          ${achieved && aDate ? `<div style="font-size:10px;color:var(--green);margin-top:4px;">✓ ${aDate} 달성</div>` : ''}
+        </div>` : ''}
+      </div>
+      <div class="milestone-actions">
+        <button class="btn-sm tooltip" onclick="openNoteModal('${m.id}','${escHtml(m.title)}')" title="메모">✏️<span class="tooltip-text">메모</span></button>
+        <button class="btn-sm ${achieved?'active':''} tooltip" onclick="quickToggle('${m.id}')" title="달성">✓<span class="tooltip-text">달성</span></button>
+      </div>
+    </div>`;
+  }).join('');
+}
+// ─── RENDER SOCIAL TABLE ─────────────────────────────────────────────
+function renderSocial() {
+  const el = document.getElementById('socialTable');
+  el.innerHTML = `<tr><th>월령</th><th>주제</th><th>발달 내용</th><th>관찰 포인트</th><th>부모 역할</th></tr>` +
+    SOCIAL_DATA.map((d,i)=>`
+    <tr ${i%2===0?'':'style="background:rgba(13,27,62,0.02)"'}>
+      <td class="age-col">${d.age}</td>
+      <td style="font-weight:700;color:var(--navy);white-space:nowrap;">${d.topic}</td>
+      <td>${d.content}</td>
+      <td style="color:var(--gold);font-size:11px;">${d.point}</td>
+      <td>${d.role}</td>
+    </tr>`).join('');
+}
+// ─── RENDER FEEDING TABLE ─────────────────────────────────────────────
+function renderFeeding() {
+  const el = document.getElementById('feedingTable');
+  el.innerHTML = `<tr><th>월령</th><th>수유</th><th>1회량/수유횟수</th><th>이유식 단계</th><th>추천 식재료</th><th>주의</th><th>메모</th></tr>` +
+    FEEDING_DATA.map((d,i)=>`
+    <tr ${i%2===0?'':'style="background:rgba(13,27,62,0.02)"'}>
+      <td class="age-col">${d.age}</td>
+      <td>${d.type}</td>
+      <td>${d.amount}<br><small style="color:var(--text3)">${d.freq}</small></td>
+      <td style="font-weight:700;color:var(--navy);">${d.stage}</td>
+      <td style="color:var(--green);font-size:11px;">${d.ok}</td>
+      <td style="color:var(--red);font-size:11px;">${d.avoid}</td>
+      <td style="font-size:11px;color:var(--text2);">${d.note}</td>
+    </tr>`).join('');
+}
+// ─── RENDER LANGUAGE TABLE ───────────────────────────────────────────
+function renderLanguage() {
+  const el = document.getElementById('languageTable');
+  el.innerHTML = `<tr><th>월령</th><th>단계</th><th>표현 언어</th><th>이해 언어</th><th>어휘 수</th><th>부모 지원법</th></tr>` +
+    LANGUAGE_DATA.map((d,i)=>`
+    <tr ${i%2===0?'':'style="background:rgba(13,27,62,0.02)"'}>
+      <td class="age-col">${d.age}</td>
+      <td style="font-weight:700;color:var(--navy);white-space:nowrap;">${d.stage}</td>
+      <td>${d.express}</td>
+      <td>${d.receive}</td>
+      <td style="font-weight:700;color:var(--gold);text-align:center;">${d.vocab}</td>
+      <td style="font-size:11px;color:var(--text2);">${d.tip}</td>
+    </tr>`).join('');
+}
+// ─── RENDER MOTOR TABLE ──────────────────────────────────────────────
+function renderMotor() {
+  const el = document.getElementById('motorTable');
+  el.innerHTML = `<tr><th>월령</th><th>주요 이정표</th><th>대근육</th><th>소근육</th><th>보행 발달</th><th>안전 주의</th></tr>` +
+    MOTOR_DATA.map((d,i)=>`
+    <tr ${i%2===0?'':'style="background:rgba(13,27,62,0.02)"'}>
+      <td class="age-col">${d.age}</td>
+      <td style="font-weight:700;color:var(--navy);">${d.milestone}</td>
+      <td>${d.gross}</td>
+      <td>${d.fine}</td>
+      <td style="color:var(--orange);font-weight:600;">${d.walk}</td>
+      <td style="color:var(--red);font-size:11px;">${d.safety}</td>
+    </tr>`).join('');
+}
+// ─── RENDER SLEEP CHART ──────────────────────────────────────────────
+function renderSleep() {
+  const el = document.getElementById('sleepChart');
+  const colors = ['#1B3A6B','#243770','#2E4D8A','#3860A8','#4A74C0','#5E8DD4'];
+  el.innerHTML = `
+    <div style="padding:12px 16px;border-bottom:1px solid rgba(13,27,62,0.06);">
+      <div style="display:flex;gap:16px;font-size:10px;color:var(--text3);">
+        <span>⬛ 색이 짙을수록 어린 시기</span>
+        <span>총 수면 = 낮잠 + 밤잠</span>
+      </div>
+    </div>` +
+    SLEEP_DATA.map((d,i)=>`
+    <div class="sleep-bar">
+      <div class="sleep-age">${d.age}</div>
+      <div class="sleep-track">
+        <div class="sleep-fill" style="width:${d.pct}%;background:${colors[i]};">
+          <span>${d.total}시간</span>
+        </div>
+      </div>
+      <div class="sleep-label">낮잠 ${d.nap}</div>
+    </div>`).join('') +
+    `<div style="padding:12px 16px 4px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;border-top:1px solid rgba(13,27,62,0.06);">
+      ${SLEEP_DATA.map(d=>`
+      <div style="text-align:center;padding:8px;background:var(--cream);border-radius:8px;">
+        <div style="font-size:11px;color:var(--navy);font-weight:700;">${d.age}</div>
+        <div style="font-size:10px;color:var(--text3);">밤잠 ${d.night}</div>
+        <div style="font-size:10px;color:var(--gold);">낮잠 ${d.napDur}</div>
+      </div>`).join('')}
+    </div>`;
+}
+// ─── RENDER VACCINE LIST ─────────────────────────────────────────────
+function renderVaccines() {
+  const el = document.getElementById('vaccineList');
+  el.innerHTML = VACCINES.map(v => {
+    const done = state.vaccDone[v.id];
+    return `
+    <div class="vacc-row ${done?'done-row':''}">
+      <div class="vacc-check ${done?'done':''}" onclick="toggleVacc('${v.id}')">
+        ${done ? '✓' : ''}
+      </div>
+      <div class="vacc-info">
+        <div class="vacc-age">📅 ${v.age}</div>
+        <div class="vacc-name">${v.name}</div>
+        <div class="vacc-desc">${v.disease}</div>
+        <div class="vacc-date">💊 ${v.note}</div>
+        ${done && state.vaccDone[v.id].date ? `<div class="vacc-date" style="color:var(--green);">✓ ${state.vaccDone[v.id].date} 완료</div>` : ''}
+      </div>
+      <div>
+        ${done ? '<span style="font-size:20px;">✅</span>' : '<span style="font-size:20px;opacity:0.2;">⬜</span>'}
+      </div>
+    </div>`;
+  }).join('');
+}
+// ─── RENDER DIARY ────────────────────────────────────────────────────
+function renderDiary() {
+  const grid = document.getElementById('diaryGrid');
+  const empty = document.getElementById('diaryEmpty');
+  if (!state.diaries || state.diaries.length === 0) {
+    grid.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+  const sorted = [...state.diaries].sort((a,b) => new Date(b.date) - new Date(a.date));
+  grid.innerHTML = sorted.map(d => `
+    <div class="note-card" onclick="editDiary('${d.id}')">
+      <div class="note-card-edit">✏️</div>
+      <div class="note-card-age">📅 ${d.date} ${d.category ? '· ' + d.category : ''}</div>
+      <div class="note-card-title">${escHtml(d.title || '제목 없음')}</div>
+      <div class="note-card-body">${escHtml((d.content || '').substring(0,100))}${(d.content||'').length > 100 ? '...' : ''}</div>
+    </div>`).join('');
+}
+// ─── INTERACTIONS ────────────────────────────────────────────────────
+function toggleVacc(id) {
+  if (state.vaccDone[id]) {
+    delete state.vaccDone[id];
+  } else {
+    const today = new Date().toISOString().split('T')[0];
+    state.vaccDone[id] = { date: today };
+  }
+  saveState();
+  renderVaccines();
+}
+let editingNoteId = null;
+let noteAchieved = true;
+function openNoteModal(id, title) {
+  editingNoteId = id;
+  document.getElementById('noteModalTitle').textContent = '📝 ' + title;
+  document.getElementById('noteContent').value = state.milestoneNotes[id] || '';
+  noteAchieved = state.milestoneAchieved[id] || false;
+  setAchieved(noteAchieved);
+  document.getElementById('achievedDate').value = state.achievedDates[id] || '';
+  openModal('noteModal');
+}
+function setAchieved(v) {
+  noteAchieved = v;
+  document.getElementById('chip-achieved').classList.toggle('sel', v);
+  document.getElementById('chip-not-achieved').classList.toggle('sel', !v);
+  document.getElementById('achievedDateGroup').style.display = v ? 'block' : 'none';
+}
+function saveNote() {
+  if (!editingNoteId) return;
+  const note = document.getElementById('noteContent').value.trim();
+  const aDate = document.getElementById('achievedDate').value;
+  if (note) state.milestoneNotes[editingNoteId] = note;
+  else delete state.milestoneNotes[editingNoteId];
+  state.milestoneAchieved[editingNoteId] = noteAchieved;
+  if (noteAchieved && aDate) state.achievedDates[editingNoteId] = aDate;
+  saveState();
+  renderMilestones();
+  closeModal('noteModal');
+}
+function quickToggle(id) {
+  state.milestoneAchieved[id] = !state.milestoneAchieved[id];
+  if (state.milestoneAchieved[id] && !state.achievedDates[id]) {
+    state.achievedDates[id] = new Date().toISOString().split('T')[0];
+  }
+  saveState();
+  renderMilestones();
+}
+// ─── DIARY CRUD ──────────────────────────────────────────────────────
+let editingDiaryId = null;
+let selectedDiaryCategory = '일상';
+function fabAction() {
+  const tab = document.querySelector('.nav-tab.active').dataset.tab;
+  if (tab === 'diary') {
+    editingDiaryId = null;
+    document.getElementById('diaryModalTitle').textContent = '📔 육아일기 작성';
+    document.getElementById('diaryDate').value = new Date().toISOString().split('T')[0];
+    document.getElementById('diaryTitle').value = '';
+    document.getElementById('diaryContent').value = '';
+    document.getElementById('deleteDiaryBtn').style.display = 'none';
+    selectedDiaryCategory = '일상';
+    document.querySelectorAll('#diaryCategoryChips .chip').forEach(c => {
+      c.classList.toggle('sel', c.textContent.trim() === '일상');
+    });
+    openModal('diaryModal');
+  } else {
+    openSettingsModal();
+  }
+}
+function toggleDiaryCategory(el, cat) {
+  document.querySelectorAll('#diaryCategoryChips .chip').forEach(c => c.classList.remove('sel'));
+  el.classList.add('sel');
+  selectedDiaryCategory = cat;
+}
+function saveDiary() {
+  const date = document.getElementById('diaryDate').value;
+  const title = document.getElementById('diaryTitle').value.trim();
+  const content = document.getElementById('diaryContent').value.trim();
+  if (!title && !content) return;
+  if (!state.diaries) state.diaries = [];
+  if (editingDiaryId) {
+    const i = state.diaries.findIndex(d => d.id === editingDiaryId);
+    if (i >= 0) state.diaries[i] = {id: editingDiaryId, date, title, content, category: selectedDiaryCategory};
+  } else {
+    state.diaries.push({id: Date.now().toString(), date, title, content, category: selectedDiaryCategory});
+  }
+  saveState();
+  renderDiary();
+  closeModal('diaryModal');
+}
+function editDiary(id) {
+  const d = state.diaries.find(x => x.id === id);
+  if (!d) return;
+  editingDiaryId = id;
+  document.getElementById('diaryModalTitle').textContent = '📔 일기 수정';
+  document.getElementById('diaryDate').value = d.date;
+  document.getElementById('diaryTitle').value = d.title || '';
+  document.getElementById('diaryContent').value = d.content || '';
+  document.getElementById('deleteDiaryBtn').style.display = 'inline-flex';
+  selectedDiaryCategory = d.category || '일상';
+  document.querySelectorAll('#diaryCategoryChips .chip').forEach(c => {
+    c.classList.toggle('sel', c.textContent.trim() === selectedDiaryCategory);
+  });
+  openModal('diaryModal');
+}
+function deleteDiary() {
+  if (!editingDiaryId || !confirm('이 일기를 삭제할까요?')) return;
+  state.diaries = state.diaries.filter(d => d.id !== editingDiaryId);
+  saveState();
+  renderDiary();
+  closeModal('diaryModal');
+}
+// ─── SETTINGS ────────────────────────────────────────────────────────
+let settingGender = 'boy';
+function selectGender(g) {
+  settingGender = g;
+  document.getElementById('chip-boy').classList.toggle('sel', g==='boy');
+  document.getElementById('chip-girl').classList.toggle('sel', g==='girl');
+}
+function openSettingsModal() {
+  document.getElementById('settingName').value = state.name || '';
+  document.getElementById('settingBirth').value = state.birth || '';
+  settingGender = state.gender || 'boy';
+  selectGender(settingGender);
+  openModal('settingsModal');
+}
+function saveSettings() {
+  state.name = document.getElementById('settingName').value.trim();
+  state.birth = document.getElementById('settingBirth').value;
+  state.gender = settingGender;
+  saveState();
+  updateHeader();
+  renderMilestones();
+  closeModal('settingsModal');
+}
+// ─── SHARE & EXPORT ──────────────────────────────────────────────────
+function openShareModal() {
+  document.getElementById('shareUrl').textContent = window.location.href;
+  openModal('shareModal');
+}
+function copyUrl() {
+  navigator.clipboard.writeText(window.location.href).then(()=>alert('링크가 복사되었습니다!'));
+}
+function exportData() {
+  const data = JSON.stringify(state, null, 2);
+  const blob = new Blob([data], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = (state.name||'baby') + '_diary_' + new Date().toISOString().split('T')[0] + '.json';
+  a.click();
+}
+function importData(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const imported = JSON.parse(e.target.result);
+      state = {...state, ...imported};
+      saveState();
+      updateHeader();
+      renderAll();
+      closeModal('shareModal');
+      alert('데이터를 가져왔습니다!');
+    } catch {
+      alert('파일 형식이 올바르지 않습니다.');
+    }
+  };
+  reader.readAsText(file);
+}
+// ─── MODAL HELPERS ───────────────────────────────────────────────────
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.modal-overlay').forEach(el => {
+  el.addEventListener('click', e => {
+    if (e.target === el) closeModal(el.id);
+  });
+});
+// ─── TAB SWITCHING ───────────────────────────────────────────────────
+function switchTab(name, el) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const sec = document.getElementById('sec-' + name);
+  if (sec) { sec.classList.add('active'); }
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+// ─── UTILS ───────────────────────────────────────────────────────────
+function escHtml(str) {
+  return (str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+}
+// Scroll to top btn
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('scrollTopBtn');
+  btn.classList.toggle('show', window.scrollY > 300);
+});
+// ─── INIT ─────────────────────────────────────────────────────────────
+function renderAll() {
+  renderMilestones();
+  renderSocial();
+  renderFeeding();
+  renderLanguage();
+  renderMotor();
+  renderSleep();
+  renderVaccines();
+  renderDiary();
+}
+loadState();
+updateHeader();
+renderAll();
+// Auto-update every minute
+setInterval(updateHeader, 60000);
+// If no birth set, open settings
+if (!state.birth) {
+  setTimeout(() => openSettingsModal(), 800);
+}
+</script>
+</body>
+</html>
